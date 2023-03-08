@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+
+    <link rel="stylesheet" href="/stylesheets/order.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+    <div class="container-fluid my-5  d-flex  justify-content-center">
+        <div class="card card-1">
+            <div class="card-header bg-white">
+                <div class="media flex-sm-row  justify-content-around  ">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div class="col-auto  my-auto pl-0 pt-sm-4">
+                        <a href="/">
+                            <h3 class=""><i class="fa fa-home"></i></h3>
+                        </a>
+                    </div>
+                </div>
+                <div class="media flex-sm-row flex-column-reverse justify-content-between  ">
+                    <div class="col my-auto">
+                        <h4 class="mb-0">Thanks for your Order,<span class="change-color"
+                                style="text-transform: capitalize;">
+                                <%= user.fname%>
+                            </span> !</h4>
+                    </div>
+                    <div class="col-auto text-center  my-auto pl-0 pt-sm-4"> <img
+                            class="img-fluid my-auto align-items-center mb-0 pt-3" src="https://i.imgur.com/7q7gIzR.png"
+                            width="115" height="115">
+                        <p class="mb-4 pt-0 Glasses">Cars For Everyone</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row justify-content-between mb-3">
+                    <div class="col-auto">
+                        <h6 class="color-1 mb-0 change-color">Receipt</h6>
+                    </div>
+                    <div class="col-auto  "> <small>Receipt Voucher : 1KAU9-84UIL</small> </div>
+                </div>
+                <% orders.forEach((datas)=>{ %>
+                    <% datas.carId.forEach((data)=> {%>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="card card-2">
+
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="sq align-self-center ">
+
+                                                <img class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0"
+                                                    src="/<%= data.carId.image[1].path%>" width="135" height="135" />
+
+                                            </div>
+                                            <div class="media-body my-auto text-right">
+                                                <div class="row  my-auto flex-column flex-md-row">
+
+                                                    <div class="col my-auto">
+
+                                                        <h6 class="mb-0" id="carName">
+                                                            <%= datas.name%>
+                                                        </h6>
+
+                                                    </div>
+                                                    <div class="col-auto my-auto"> <small id="orderCount">Qty :<%=
+                                                                data.quantity%>
+                                                        </small>
+                                                    </div>
+                                                    <input type="hidden" id="<%= data?._id %>" value="<%=data?._id%>">
+                                                    <div class="col my-auto"> <small>Paid :&#8377;
+                                                            <%= data.paid%>
+                                                        </small></div>
+                                                    <div class="col my-auto"> <small>Payable :&#8377;
+                                                            <%= data.payable%>
+                                                        </small></div>
+                                                    <div class="col my-auto">
+                                                        <% let total=data.paid + data.payable %>
+                                                            <h6 class="mb-0">Total :&#8377;<%= total%>
+                                                            </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="my-3 ">
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3"> <small> Track Order <span><i
+                                                            class=" ml-2 fa fa-refresh"
+                                                            aria-hidden="true"></i></span></small> </div>
+                                            <div class="col mt-auto">
+                                                <div class="progress my-auto">
+                                                    <div class="progress-bar progress-bar  rounded" style="width: 30%"
+                                                        role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="media row justify-content-between ">
+                                                    <div class="col-auto text-right"><span> <small
+                                                                class="text-right mr-sm-2"></small> <i
+                                                                class="fa fa-circle active"></i> </span></div>
+                                                    <div class="flex-col"> <span> <small class="text-right mr-sm-2">Out
+                                                                for
+                                                                delivary</small><i
+                                                                class="fa fa-circle active"></i></span>
+                                                    </div>
+                                                    <div class="col-auto flex-col-auto"><small
+                                                            class="text-right mr-sm-2">Delivered</small><span> <i
+                                                                class="fa fa-circle"></i></span></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3 d-flex justify-content-end">
+                                                <% if( data.status){%>
+                                                    <%if ( orderData ){%>
+                                                        <% orderData.carId.forEach((dataorder)=>{%>
+                                                            <%if(data.payable !==0){%>
+                                                                <small>
+                                                                    <button class="btn-secondary" id="canceled"
+                                                                        onclick="return cancelOrder('<%=data._id%>')">Cancel</button>
+                                                                    <span></span>
+                                                                </small>
+
+                                                                <small>
+                                                                    <button class="text-primary"
+                                                                        onclick="return payNow('<%= dataorder._id%>','<%= data._id%>')">Pay
+                                                                        Now
+                                                                    </button>
+                                                                </small>
+                                                                <%} else{%>
+                                                                    Payment succesful
+                                                                    <%}%>
+                                                                        <%})%>
+                                                                            <%}%>
+                                                                                <%}else{%>
+                                                                                    Item Cancelled
+                                                                                    <%}%>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%})%>
+                            <%})%>
+                                <div class="row mt-4">
+                                    <div class="col">
+                                        <div class="row justify-content-between">
+                                            <div class="col-auto">
+                                                <p class="mb-1 text-dark"><b>Order Details</b></p>
+                                            </div>
+                                            <div class="flex-sm-col text-right col">
+                                                <p class="mb-1"><b>Total</b></p>
+                                            </div>
+                                            <div class="flex-sm-col col-auto">
+                                                <p class="mb-1">&#8377;4,835</p>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-between">
+                                            <div class="flex-sm-col text-right col">
+                                                <p class="mb-1"> <b>Discount</b></p>
+                                            </div>
+                                            <div class="flex-sm-col col-auto">
+                                                <p class="mb-1">&#8377;<%= totalDiscount%>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-between">
+                                            <div class="flex-sm-col text-right col">
+                                                <p class="mb-1"><b>GST 18%</b></p>
+                                            </div>
+                                            <div class="flex-sm-col col-auto">
+                                                <p class="mb-1">
+                                                    <%= totalGst%>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-between">
+                                            <div class="flex-sm-col text-right col">
+                                                <p class="mb-1"><b>Delivery Charges</b></p>
+                                            </div>
+                                            <div class="flex-sm-col col-auto">
+                                                <p class="mb-1">Free</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row invoice ">
+                                    <div class="col">
+                                        <p class="mb-1"> Invoice Number : 788152</p>
+                                        <p class="mb-1">Invoice Date : 22 Dec,2019</p>
+                                        <p class="mb-1">Recepits Voucher:18KU-62IIK</p>
+                                    </div>
+                                </div>
+            </div>
+            <div class="card-footer">
+                <div class="jumbotron-fluid">
+                    <div class="row justify-content-between ">
+                        <div class="col-sm-auto col-auto my-auto"><img class="img-fluid my-auto align-self-center "
+                                src="https://i.imgur.com/7q7gIzR.png" width="115" height="115"></div>
+                        <div class="col-auto my-auto ">
+                            <h2 class="mb-0 font-weight-bold">TOTAL PAID</h2>
+                        </div>
+                        <div class="col-auto my-auto ml-auto">
+                            <h1 class="display-3 ">&#8377; 5,528</h1>
+                        </div>
+                    </div>
+                    <div class="row mb-3 mt-3 mt-md-0">
+                        <div class="col-auto border-line"> <small class="text-white">PAN:AA02hDW7E</small></div>
+                        <div class="col-auto border-line"> <small class="text-white">CIN:UMMC20PTC </small></div>
+                        <div class="col-auto "><small class="text-white">GSTN:268FD07EXX </small> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger" href="/signOut">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        function payNow(orderId, dataId) {
+            console.log(orderId);
+            // const dataId = document.getElementById('dataId').value
+            console.log(dataId);
+
+            fetch('/payNow', {
+                method: "POST",
+                body: JSON.stringify({
+                    orderId,
+                    dataId
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((response) => response.json())
+                .then((order) => {
+                    toString(order)
+
+                    if (order.success) {
+                        console.log(JSON.stringify(order) + "order");
+                        let options = {
+                            key: "rzp_test_C9okbWzHpHQQPA",
+                            name: "Sefage Car",
+                            amount: order.amount * 100,
+                            order_id: order.options.id,
+                            currency: "INR",
+                            description: "Test Transaction",
+                            image: "/images/logo2.png",
+                            handler: function (response) {
+                                verifyPayment(response, order);
+                            },
+                            prefill: {
+                                name: "Muhammed Jaseer",
+                                email: "mjaseer43@gmail.com",
+                                contact: "9876543210"
+                            },
+                            notes: {
+                                address: "Razorpay Corporate Office"
+                            },
+                            theme: {
+                                color: "#808080"
+                            }
+                        };
+                        var rzp2 = new Razorpay(options);
+                        rzp2.on('payment.failed', function (response) {
+                            console.log("paymentfialed");
+                        });
+                        rzp2.open();
+                    } else {
+                        swal.fire({
+                            title: "Booking Failed",
+                            text: `Failed`,
+                            icon: "warning",
+                            button: "Okay",
+                        })
+                    }
+                })
+        }
+
+        function verifyPayment(response, order) {
+            console.log(JSON.stringify(response));
+            console.log(JSON.stringify(order));
+
+            fetch('/verifyFull', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    response,
+                    order,
+                }),
+            })
+        }
+
+
+        function cancelOrder(orderId) {
+
+            fetch('/cancelOrder', {
+                method: "POST",
+                body: JSON.stringify({
+                    orderId,
+
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    if (response.success) {
+                        swal.fire({
+                            title: `${response.data.carId.quantity} succesfully canceled`,
+                            text: `${response.data.carId}`,
+                            icon: "success",
+                            button: "Okay"
+                        })
+                        location.reload()
+                    } else {
+                        swal.fire({
+                            title: "Ticket not canceled.",
+                            text: `Error occured in your ticket cancelation:${response.err}`,
+                            icon: "warning",
+                            button: "Okay"
+                        })
+                    }
+                })
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

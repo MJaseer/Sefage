@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= cars.name%>
+    </title>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendo/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendo/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendo/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendo/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendo/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendo/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendo/slick/slick.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendo/MagnificPopup/magnific-popup.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendo/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/cssb/util.css">
+    <link rel="stylesheet" type="text/css" href="/cssb/main.css">
+
+    <!-- <link rel="stylesheet" href="/css/sb-admin-2.css"> -->
+    <!--===============================================================================================-->
+
+</head>
+
+<body>
+
+
+    <div class=" p-t-60 p-b-20">
+        <div class=" "></div>
+
+        <div class="container">
+            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+                <a href="/browse" class="how-pos3 hov3 trans-04">
+                    <img src="/images/icons/icon-close2.png" alt="CLOSE">
+                </a>
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-7 p-b-30">
+                        <div class="p-l-25 p-r-30 p-lr-0-lg">
+                            <div class="wrap-slick3 flex-sb flex-w">
+                                <div class="wrap-slick3-dots"></div>
+                                <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+                                <div class="slick3 gallery-lb">
+
+                                    <% for (var i=0; i < 3 && i < cars.image.length; i++) { %>
+                                        <div class="item-slick3" data-thumb="/<%= cars.image[i].path %>">
+                                            <div class="wrap-pic-w pos-relative">
+                                                <img src="/<%= cars.image[i].path %>" alt="IMG-PRODUCT">
+
+                                                <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                    href="/<%= cars.image[i].path %>">
+                                                    <i class="fa fa-expand"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <% } %>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-5 p-b-30 d-flex justify-content-center">
+                        <div class="p-r-50 p-t-5 p-lr-0-lg">
+
+                            <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+                                <%= cars.name%>
+                            </h4>
+
+                            <p class="mtext-106 cl2">
+                                Ex-showroom Price : <%= cars.price%>
+                            </p>
+                            <p class="mtext-106 cl2">
+                                Tickets Availiable : <span class="mtext-106 cl2" id="ticketAvail">
+                                    <%= cars.ticket%>
+                                </span>
+                            </p>
+                            <p class="mtext-106 cl2 ">
+                                Tickets Rate : <%= cars.ticketrate%>
+                            </p>
+
+                            <!--  -->
+                            <div class="p-t-33 ">
+                                <%if(userData !=null){%>
+                                    <form action="/book/<%= cars._id%>?_method=PUT" method="post" id="paymentForm">
+                                        <div class="flex-w flex-r-m p-b-10 ">
+                                            <div class="size-203  flex-c-m respon6" style="font-weight: bold;">
+                                                Ticekts :<%= cars.ticket%>
+                                            </div>
+
+                                            <div class="size-204 flex-w flex-m respon6-next">
+                                                <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                                    <button class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
+                                                        type="button" id="count2"
+                                                        onclick="decrement('<%= cars.ticketrate%>')">
+                                                        <i class="fs-16 zmdi zmdi-minus"></i>
+                                                    </button>
+
+                                                    <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                        onclick="" id="count1" name="count" value="1" min="1" max="12">
+
+                                                    <button class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
+                                                        type="button" id="count"
+                                                        onclick="increment('<%= cars.ticketrate%>')">
+                                                        <i class="fs-16 zmdi zmdi-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="flex-w flex-r-m d-flex justify-content-center flex-column ">
+                                            <div class="mb-3">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control bg-light border-0 small"
+                                                        placeholder="Apply Coupon Here" aria-label="Search"
+                                                        name="coupon" aria-describedby="basic-addon2" id="couponCode">
+                                                    <div id="couponError"></div>
+                                                    <button class="btn btn-secondary" type="button" id="coupon"
+                                                        onclick="coupons()">
+                                                        <i class=" fa fa-ticket"></i>
+                                                    </button>
+                                                    <input type="hidden" value="<%=cars._id%>" name="id" id="carId">
+                                                    <div class="input-group-append">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <b
+                                                style="color: rgb(99, 99, 99);font-weight: bolder;font-size: large">total:</b>
+                                            <input type="hidden" value=" <%=cars.ticketrate%>" id="rate" name="rate">
+                                            <div id="sum"
+                                                style="color: rgb(99, 99, 99);font-weight: bolder;font-size: large">
+                                                <%=cars.ticketrate%>
+                                            </div><b
+                                                style="color: rgb(99, 99, 99);font-weight: bolder;font-size: large">INR</b>
+                                            <button
+                                                class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                <input
+                                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                                    type="submit" value="Book Your Ticket">
+                                            </button>
+
+                                        </div>
+                                    </form>
+
+                                    <%} else {%>
+                                        <div class="d-flex justify-content-around btn">
+                                            <b><a class="text-danger" href="/login">Click here to Login</a></b>
+                                            <b></b>
+                                        </div>
+                                        <%}%>
+                            </div>
+
+                            <!--  -->
+                            <div class="flex-w flex-m p-l-100 p-t-40 respon7">
+                                <div class="flex-m bor9 p-r-10 m-r-11">
+                                    <a href="#"
+                                        class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+                                        data-tooltip="Add to Wishlist">
+                                        <i class="zmdi zmdi-favorite"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--===============================================================================================-->
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <!--===============================================================================================-->
+        <script>
+
+            var sum = document.getElementById('rate').value
+
+            function increment(val) {
+
+                const quantity = document.getElementById('count1')
+                let value = Number(quantity.value)
+                sum = val * (value + 1);
+
+                if (sum > val * 12) {
+                    document.getElementById('sum').innerText = val * 12
+                } else {
+                    document.getElementById('sum').innerText = sum
+                }
+            }
+
+            function decrement(val) {
+
+                const quantity = document.getElementById('count1')
+                let value = Number(quantity.value)
+                sum = val * (value - 1);
+                if (sum == 0) {
+                    document.getElementById('sum').innerText = val
+                } else {
+                    document.getElementById('sum').innerText = sum
+                }
+
+            }
+
+
+            function coupons() {
+                const couponCode = document.getElementById('couponCode').value;
+                const carId = document.getElementById('carId').value;
+                const quantity = document.getElementById('count1').value;
+
+                const couponError = document.getElementById('couponError')
+
+
+                fetch("/applyCoupon", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        couponCode,
+                        carId,
+                        quantity
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((discount) => {
+                        if (discount.success) {
+                            const discNumber = parseInt(discount.discount)
+                            const discounted = sum - discNumber
+                            document.getElementById('sum').innerText = discounted
+                            swal.fire({
+                                title: "Coupon succesfully added.",
+                                text: `You got ${discNumber} rupees discount`,
+                                icon:"success",
+                                button:"Okay"
+                            })
+                        } else if (discount.msg == "no") {
+                            swal.fire({
+                                title: "Coupon already used!",
+                                text: `Please check and enter another coupon code ;`,
+                                icon: "warning",
+                                button: "Okay",
+                            })
+                        }
+                        else {
+                            swal.fire({
+                                title: "Invalid coupon!",
+                                text: `Please check and enter correct coupon code`,
+                                icon: "warning",
+                                button: "Okay",
+                            })
+
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error updating total price:", error);
+                    });
+
+            };
+
+        </script>
+        <!--===============================================================================================-->
+        <script src="/javascripts/cart.js"></script>
+        <!--===============================================================================================-->
+        <script src="/vendo/jquery/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="/vendo/animsition/js/animsition.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="/vendo/bootstrap/js/popper.js"></script>
+        <!--===============================================================================================-->
+        <script src="/vendo/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="/vendo/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+
+        <!--===============================================================================================-->
+        <script>
+            $(".js-select2").each(function () {
+                $(this).select2({
+                    minimumResultsForSearch: 20,
+                    dropdownParent: $(this).next('.dropDownSelect2')
+                });
+            })
+        </script>
+        <!--===============================================================================================-->
+        <script src="/vendo/daterangepicker/moment.min.js"></script>
+        <script src="/vendo/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="/vendo/slick/slick.min.js"></script>
+        <script src="/jsb/slick-custom.js"></script>
+        <!--===============================================================================================-->
+        <script src="/vendo/parallax100/parallax100.js"></script>
+        <script>
+            $('.parallax100').parallax100();
+        </script>
+        <!--===============================================================================================-->
+        <script src="/vendo/MagnificPopup/jquery.magnific-popup.min.js"></script>
+        <script>
+            $('.gallery-lb').each(function () { // the containers for all your galleries
+                $(this).magnificPopup({
+                    delegate: 'a', // the selector for gallery item
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    },
+                    mainClass: 'mfp-fade'
+                });
+            });
+        </script>
+        <!--===============================================================================================-->
+        <script src="/vendo/isotope/isotope.pkgd.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="/vendo/sweetalert/sweetalert.min.js"></script>
+        <script>
+            $('.js-addwish-b2, .js-addwish-detail').on('click', function (e) {
+                e.preventDefault();
+            });
+
+            $('.js-addwish-b2').each(function () {
+                var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+                $(this).on('click', function () {
+                    swal(nameProduct, "is added to wishlist !", "success");
+
+                    $(this).addClass('js-addedwish-b2');
+                    $(this).off('click');
+                });
+            });
+
+            $('.js-addwish-detail').each(function () {
+                var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+                $(this).on('click', function () {
+                    swal(nameProduct, "is added to wishlist !", "success");
+
+                    $(this).addClass('js-addedwish-detail');
+                    $(this).off('click');
+                });
+            });
+
+            /*---------------------------------------------*/
+
+            $('.js-addcart-detail').each(function () {
+                var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+                $(this).on('click', function () {
+                    swal(nameProduct, "is Booked !", "success");
+                });
+            });
+
+        </script>
+        <!--===============================================================================================-->
+
+        <script>
+            const input = document.getElementById("count");
+
+            const max = 12;
+
+            input.addEventListener("input", function () {
+                if (this.value > max) {
+                    this.value = max;
+                }
+            });
+            const min = 1;
+
+            input.addEventListener("input", function () {
+                if (this.value < min) {
+                    this.value = min;
+                }
+            })
+        </script>
+
+        <!--===============================================================================================-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="/vendo/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script>
+            $('.js-pscroll').each(function () {
+                $(this).css('position', 'relative');
+                $(this).css('overflow', 'hidden');
+                var ps = new PerfectScrollbar(this, {
+                    wheelSpeed: 1,
+                    scrollingThreshold: 1000,
+                    wheelPropagation: false,
+                });
+
+                $(window).on('resize', function () {
+                    ps.update();
+                })
+            });
+        </script>
+        <!--===============================================================================================-->
+        <script src="/jsb/main.js"></script>
+</body>
+
+</html>

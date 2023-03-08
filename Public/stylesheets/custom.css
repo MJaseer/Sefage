@@ -1,0 +1,48 @@
+.loginalert{
+	text-align: center;
+    font-weight: bold;
+}
+
+.signout{
+	padding: 1rem auto;
+	text-decoration: none;
+	color: rgb(201, 26, 26);
+	background-color: rgb(155, 155, 155);
+	border-radius: 5px;
+	height: 3rem;
+}
+
+.signout :hover {
+	background-color: rgb(116, 99, 99);
+}
+
+.usercard{
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+
+.cardstyle{
+	text-decoration: none;
+	justify-content: space-between;
+	margin-right: 1rem;
+}
+
+.name{
+	font-family: system-ui, -apple-system, BlinkMacSystemFont,
+	 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+	 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-size: xx-large;
+	font-weight: bold;
+	text-decoration: none;
+	color: black;
+}
+
+.product-wap{
+	display: flex;
+	flex-direction: row;
+}
+
+.drop:hover .dropdown-menu {display: block;}
+
+

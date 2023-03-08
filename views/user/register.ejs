@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sefage Register</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/public/stylesheets/custom.css">
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="/css/sb-admin-2.css">
+</head>
+
+<body class="bg-gradient-dark">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form class="user" name="form1" id="form" action="/signUp" method="post"
+                                onsubmit="return submitform(event)">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" name="fname" required="true"
+                                            class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="First Name" pattern=".*[a-zA-Z].*" required
+                                            oninvalid="this.setCustomValidity('Please enter a value with at least one letter')">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="lname" required="true"
+                                            class="form-control form-control-user" id="exampleLastName"
+                                            placeholder="Last Name" pattern=".*[a-zA-Z].*" required
+                                            oninvalid="this.setCustomValidity('Please enter a value with at least one letter')">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="email" name="email" required="true"
+                                            class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Email Address">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" name="phone" required="true"
+                                            class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Mobile Number" pattern="^[0]?[6789]\d{9}$" required
+                                            oninvalid="this.setCustomValidity('Please enter a valid 10-digit Indian phone number')"
+                                            onchange="this.setCustomValidity('')">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" name="password" required="true"
+                                            class="form-control form-control-user" id="password" placeholder="Password"
+                                            pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}$"
+                                            required
+                                            oninvalid="this.setCustomValidity('Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long.')"
+                                            oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" name="cpassword" required="true"
+                                            class="form-control form-control-user" id="exampleRepeatPassword"
+                                            placeholder="Confirm Password">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 ">
+                                        <select name="state" class="form-control  form-control-user " id="state">
+                                            <option class=" form-control form-control-user" selected="selected">Select
+                                                State</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 ">
+                                        <select name="cities" class=" form-control form-control-user" id="city">
+                                            <option class=" form-control form-control-user" selected="selected">Please
+                                                select state first</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select name="flats" class=" form-control form-control-user" id="flat">
+                                        <option class=" form-control form-control-user" selected="selected">Please
+                                            select City first</option>
+                                    </select>
+                                </div>
+                                <div class="text-center" id="error"></div>
+                                <p class="text-center " style="color:red">
+                                    <%= msg %>
+                                </p>
+                                <input type="submit" value="Register" class="btn btn-primary btn-user btn-block">
+                                <hr>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="/forgotPass">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="/login">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const form = document.querySelector("form");
+        const password = form.querySelector("#password")
+        const errorElement = form.querySelector("#error");
+
+
+        function hideErrorMessage() {
+            errorElement.innerHTML = "";
+        }
+
+
+        function showErrorMessage(message) {
+            errorElement.innerHTML = `<div class="alert text-danger bg-none " role="alert">${message}</div>`
+
+        }
+
+        function submitform(e) {
+            if (password.value.length < 6 || password.value.trim() == "") {
+                showErrorMessage("Password must be minimum 6 characters");
+                return false;
+            } if (password.value.length > 12) {
+                showErrorMessage("Password must be Lessthan 13 characters");
+                return false;
+            }
+            hideErrorMessage()
+            return true;
+        }
+
+
+    </script>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+    <script src="/location.js"></script>
+</body>
+
+</html>
