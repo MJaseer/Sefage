@@ -127,29 +127,35 @@
                                             </div>
                                             <div class="col-md-3 mb-3 d-flex justify-content-end">
                                                 <% if( data.status){%>
-                                                    <%if ( orderData ){%>
-                                                        <% orderData.carId.forEach((dataorder)=>{%>
-                                                            <%if(data.payable !==0){%>
-                                                                <small>
-                                                                    <button class="btn-secondary" id="canceled"
-                                                                        onclick="return cancelOrder('<%=data._id%>')">Cancel</button>
-                                                                    <span></span>
-                                                                </small>
+                                                    <%if ( !orderData ){%>
+                                                        <small>
+                                                            <button class="btn-secondary" id="canceled"
+                                                                onclick="return cancelOrder('<%=data._id%>')">Cancel</button>
+                                                            <span></span>
+                                                        </small>
+                                                        <%} else {%>
+                                                            <% orderData.carId.forEach((dataorder)=>{%>
+                                                                <%if(data.payable !==0){%>
+                                                                    <small>
+                                                                        <button class="btn-secondary" id="canceled"
+                                                                            onclick="return cancelOrder('<%=data._id%>')">Cancel</button>
+                                                                        <span></span>
+                                                                    </small>
 
-                                                                <small>
-                                                                    <button class="text-primary"
-                                                                        onclick="return payNow('<%= dataorder._id%>','<%= data._id%>')">Pay
-                                                                        Now
-                                                                    </button>
-                                                                </small>
-                                                                <%} else{%>
-                                                                    Payment succesful
-                                                                    <%}%>
-                                                                        <%})%>
-                                                                            <%}%>
-                                                                                <%}else{%>
-                                                                                    Item Cancelled
-                                                                                    <%}%>
+                                                                    <small>
+                                                                        <button class="text-primary"
+                                                                            onclick="return payNow('<%= dataorder._id%>','<%= data._id%>')">Pay
+                                                                            Now
+                                                                        </button>
+                                                                    </small>
+                                                                    <%} else{%>
+                                                                        Payment succesful
+                                                                        <%}%>
+                                                                            <%})%>
+                                                                                <%}%>
+                                                                                    <%}else{%>
+                                                                                        Item Cancelled
+                                                                                        <%}%>
 
                                             </div>
                                         </div>
