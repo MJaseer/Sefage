@@ -68,7 +68,7 @@
                 <img src="/images/logo3.png">
             </a>
 
-            <button class="navbar-toggler border-0 bg-light" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler border-0 bg-light text-dark" type="button" data-bs-toggle="collapse"
                 data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -105,7 +105,8 @@
                                     <i class="fa fa-fw fas fa-heart text-light mr-2"></i>
                                 </a>
                                 <% if(orderData) {%>
-                                    <a class="nav-icon position-relative text-decoration-none" href="#" role="button" data-toggle="modal" data-target="#payNow">
+                                    <a class="nav-icon position-relative text-decoration-none" href="#" role="button"
+                                        data-toggle="modal" data-target="#payNow">
                                         <i class="fa fa-bell text-success mr-1"></i>
                                     </a>
                                     <%}%>
@@ -166,7 +167,7 @@
 
         <div class="carousel-inner">
             <% banners.forEach((data)=>{ %>
-                <div class="carousel-item active bg-black">
+                <div class="carousel-item active bg-dark">
 
                     <div class="container">
                         <div class="row p-5">
@@ -209,30 +210,34 @@
 
 
     <!-- Start Categories of The Month -->
-    <section class="container py-5">
-        <div class="row text-center pt-3">
-            <div class="col-lg-6 m-auto">
-                <h1 class="h1">Explore your priority</h1>
-                <p>
-                    Select your drive with selected features.
-                </p>
+
+    <section class="bg-black">
+        <div class="container py-5 ">
+            <div class="row text-center pt-3 bg-black">
+                <div class="col-lg-6 m-auto text-light">
+                    <h1 class="h1 text-light">Explore your priority</h1>
+                    <p class="text-light">
+                        Select your drive with selected features.
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="/browse/#compactsuv"><img src="/images/luxes.jpeg" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">Compact SUV's</h5>
-                <p class="text-center"><a class="btn btn-success" href="/browse/#compactsuv">Explore</a></p>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="/browse/#suv"><img src="/images/rubicon.png" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">4x4 Off Roaders</h2>
-                <p class="text-center"><a class="btn btn-success" href="/browse/#suv">Explore</a></p>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="/browse/#sedan"><img src="/images/audis6.png" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Luxury Sedans</h2>
-                <p class="text-center"><a class="btn btn-success" href="/browse/#sedan">Explore</a></p>
+            <div class="row ">
+                <div class="col-12 col-md-4 p-5 mt-3 bg-black">
+                    <a href="/browse/#compactsuv"><img src="/images/luxes.jpeg"
+                            class="rounded-circle img-fluid border"></a>
+                    <h5 class="text-center mt-3 mb-3 text-light">Compact SUV's</h5>
+                    <p class="text-center"><a class="btn btn-success " href="/browse/#compactsuv">Explore</a></p>
+                </div>
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    <a href="/browse/#suv"><img src="/images/rubicon.png" class="rounded-circle img-fluid border"></a>
+                    <h2 class="h5 text-center mt-3 mb-3 text-light">4x4 Off Roaders</h2>
+                    <p class="text-center"><a class="btn btn-success" href="/browse/#suv">Explore</a></p>
+                </div>
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    <a href="/browse/#sedan"><img src="/images/audis6.png" class="rounded-circle img-fluid border"></a>
+                    <h2 class="h5 text-center mt-3 mb-3 text-light">Luxury Sedans</h2>
+                    <p class="text-center"><a class="btn btn-success" href="/browse/#sedan">Explore</a></p>
+                </div>
             </div>
         </div>
     </section>
@@ -240,12 +245,12 @@
 
 
     <!-- Start Featured Product -->
-    <section class="bg-light">
+    <section class="bg-dark ">
         <div class="container py-5">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Featured Cars</h1>
-                    <p>
+                    <h1 class="h1 text-light">Featured Cars</h1>
+                    <p class="text-light">
                         You can choose electric vehicles for great future. and we assist you to get subsiedies
                         availiable from respective governments.
                     </p>
@@ -253,7 +258,7 @@
             </div>
             <div class="row">
                 <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card h-100 bg-dark">
                         <a href="/cardetails">
                             <img src="/images/featuredEQC.jpeg" class="card-img-top" alt="...">
                         </a>
@@ -266,20 +271,20 @@
                                     <i class="text-warning fa fa-star"></i>
                                     <i class="text-muted fa fa-star"></i>
                                 </li>
-                                <li class="text-muted text-right">$240.00</li>
+                                <li class="text-light text-right">$240.00</li>
                             </ul>
-                            <a href="/cardetails" class="h2 text-decoration-none text-dark">Mercedes EQC</a>
-                            <p class="card-text">
+                            <a href="/cardetails" class="h2 text-decoration-none text-light">Mercedes EQC</a>
+                            <p class="card-text text-light">
                                 Perfect luxury SUV to drive. Enjoy your drives without harming nature. Mercedes EQC
                                 gives perfect luxurious drives.
                             </p>
-                            <p class="text-muted">Reviews (24)</p>
+                            <p class="text-light">Reviews (24)</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="/cardetails">
+                    <div class="card h-100 bg-dark">
+                        <a href="/cardetails ">
                             <img src="/images/featuredbmw.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -291,19 +296,19 @@
                                     <i class="text-warning fa fa-star"></i>
                                     <i class="text-muted fa fa-star"></i>
                                 </li>
-                                <li class="text-muted text-right">$480.00</li>
+                                <li class="text-light text-right">$480.00</li>
                             </ul>
-                            <a href="shop-single.ejs" class="h2 text-decoration-none text-dark">BMW I4</a>
-                            <p class="card-text">
+                            <a href="shop-single.ejs" class="h2 text-decoration-none text-light">BMW I4</a>
+                            <p class="card-text text-light">
                                 Perfect way to drive a super-sporty sedan. I4 comes with authentic BMW design with
                                 electrical touch.
                             </p>
-                            <p class="text-muted">Reviews (48)</p>
+                            <p class="text-light">Reviews (48)</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card h-100 bg-dark">
                         <a href="shop-single.ejs">
                             <img src="/images/featuredipace.jpg" class="card-img-top" alt="...">
                         </a>
@@ -316,13 +321,13 @@
                                     <i class="text-warning fa fa-star"></i>
                                     <i class="text-warning fa fa-star"></i>
                                 </li>
-                                <li class="text-muted text-right">$360.00</li>
+                                <li class="text-light text-right">$360.00</li>
                             </ul>
-                            <a href="shop-single.ejs" class="h2 text-decoration-none text-dark">Jaguar I-Pace</a>
-                            <p class="card-text">
+                            <a href="shop-single.ejs" class="h2 text-decoration-none text-light">Jaguar I-Pace</a>
+                            <p class="card-text text-light">
                                 The Perfection of our TATA. Compined build with power & life. The perfect luxury SUV.
                             </p>
-                            <p class="text-muted">Reviews (74)</p>
+                            <p class="text-light">Reviews (74)</p>
                         </div>
                     </div>
                 </div>
@@ -333,12 +338,12 @@
 
 
     <!-- Start Footer -->
-    <footer class="bg-dark" id="tempaltemo_footer">
+    <footer class="bg-black" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Zay Shop</h2>
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Sefage Cars</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
@@ -440,59 +445,55 @@
 
     <!-- Payment Modal -->
 
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" >
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="payNow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <!-- Modal -->
+    <div class="modal fade" id="payNow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h1>RWD List to Table</h1>
+                    <table class="rwd-table">
+                        <tr>
+                            <th>Movie Title</th>
+                            <th>Genre</th>
+                            <th>Year</th>
+                            <th>Gross</th>
+                        </tr>
+                        <tr>
+                            <td data-th="Movie Title">Star Wars</td>
+                            <td data-th="Genre">Adventure, Sci-fi</td>
+                            <td data-th="Year">1977</td>
+                            <td data-th="Gross">$460,935,665</td>
+                        </tr>
+                        <tr>
+                            <td data-th="Movie Title">Howard The Duck</td>
+                            <td data-th="Genre">"Comedy"</td>
+                            <td data-th="Year">1986</td>
+                            <td data-th="Gross">$16,295,774</td>
+                        </tr>
+                        <tr>
+                            <td data-th="Movie Title">American Graffiti</td>
+                            <td data-th="Genre">Comedy, Drama</td>
+                            <td data-th="Year">1973</td>
+                            <td data-th="Gross">$115,000,000</td>
+                        </tr>
+                    </table>
+
+                    <p>&larr; Drag window (in editor or full page view) to see the effect. &rarr;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <h1>RWD List to Table</h1>
-            <table class="rwd-table">
-              <tr>
-                <th>Movie Title</th>
-                <th>Genre</th>
-                <th>Year</th>
-                <th>Gross</th>
-              </tr>
-              <tr>
-                <td data-th="Movie Title">Star Wars</td>
-                <td data-th="Genre">Adventure, Sci-fi</td>
-                <td data-th="Year">1977</td>
-                <td data-th="Gross">$460,935,665</td>
-              </tr>
-              <tr>
-                <td data-th="Movie Title">Howard The Duck</td>
-                <td data-th="Genre">"Comedy"</td>
-                <td data-th="Year">1986</td>
-                <td data-th="Gross">$16,295,774</td>
-              </tr>
-              <tr>
-                <td data-th="Movie Title">American Graffiti</td>
-                <td data-th="Genre">Comedy, Drama</td>
-                <td data-th="Year">1973</td>
-                <td data-th="Gross">$115,000,000</td>
-              </tr>
-            </table>
-            
-            <p>&larr; Drag window (in editor or full page view) to see the effect. &rarr;</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
     <!-- Start Script -->
     <script>
         $('#myModal').on('shown.bs.modal', function () {

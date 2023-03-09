@@ -66,7 +66,7 @@ https://templatemo.com/tm-559-zay-shop
 -->
 </head>
 
-<body id="page-top">
+<body id="page-top bg-black">
     <!-- Start Top Nav -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
         <div class="container text-light">
@@ -94,17 +94,16 @@ https://templatemo.com/tm-559-zay-shop
     </nav>
 
     <!-- Close Top Nav -->
-    
-    <!-- Header -->
 
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg shadow bg-black ">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="/">
-                Sefage
+            <a class="navbar-brand align-self-center" href="/">
+                <img src="/images/logo3.png">
             </a>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler border-0 bg-light text-dark" type="button" data-bs-toggle="collapse"
                 data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -113,49 +112,40 @@ https://templatemo.com/tm-559-zay-shop
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
                 id="templatemo_main_nav">
                 <div class="flex-fill">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                    <div class="nav navbar-nav d-flex justify-content-around  mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
+                            <a class="nav-link text-light" href="/browse">Browse Cars</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/about">About</a>
+                            <a class="nav-link text-light" href="/about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact</a>
+                            <a class="nav-link text-light" href="/contact">Contact</a>
                         </li>
-                    </ul>
+                    </div>
                 </div>
                 <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
                     <a class="nav-icon position-relative text-decoration-none" href="/likes">
-                        <i class="fa fa-heart" aria-hidden="true"></i>
+                        <i class="fa fa-heart text-light" aria-hidden="true"></i>
                         <span
                             class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="/profile">
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <i class="fa fa-user text-light" aria-hidden="true"></i>
                         <span
                             class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
                 </div>
             </div>
-
         </div>
     </nav>
     <!-- Close Header -->
 
 
-    <section class="bg0 p-t-23 p-b-140">
+    <section class="bg0 p-t-23 p-b-140 bg-dark">
         <div class="container">
             <div class="p-b-10">
-                <h3 class="ltext-103 cl5">
+                <h3 class="ltext-103 text-light">
                     Product Overview
                 </h3>
                 <h5 class="stext-103 text-danger">
@@ -173,7 +163,7 @@ https://templatemo.com/tm-559-zay-shop
                     <% category.forEach((cats)=>{%>
                         <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 "
                             style="text-transform: uppercase;" data-filter=".<%= cats._id%>">
-                            <b>
+                            <b class="text-light">
                                 <%= cats.category_name%>
                             </b>
                         </button>
@@ -182,13 +172,13 @@ https://templatemo.com/tm-559-zay-shop
 
                 <div class="flex-w flex-c-m m-tb-10">
                     <div
-                        class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+                        class="flex-c-m stext-106 text-light size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
                         <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
                         <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
                         Filter
                     </div>
 
-                    <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                    <div class="flex-c-m stext-106 text-light size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
                         <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
                         <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
                         Search
@@ -196,8 +186,8 @@ https://templatemo.com/tm-559-zay-shop
                 </div>
 
                 <!-- Search product -->
-                <div class="dis-none panel-search w-full p-t-10 p-b-15">
-                    <div class="bor8 dis-flex p-l-15">
+                <div class="dis-none panel-search w-full p-t-10 p-b-15 ">
+                    <div class="bor8 dis-flex p-l-15 bg-light">
                         <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
                             <i class="zmdi zmdi-search"></i>
                         </button>
@@ -272,33 +262,33 @@ https://templatemo.com/tm-559-zay-shop
                 </div>
             </div>
 
-            <div class="row isotope-grid">
+            <div class="row isotope-grid ">
                 <% cars.forEach((car)=>{ %>
-                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <%= car.category%>">
+                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <%= car.category%> ">
 
                         <!-- Block2 -->
-                        <div class="block2">
+                        <div class="block2 ">
                             <div class="block2-pic hov-img0">
-                                    <img src="/<%= car.image[1].path %>" alt="Car Image">
+                                <img height="130vh" width="130vh" src="/<%= car.image[1].path %>" alt="Car Image">
 
                                 <a href="/carDetails?id=<%= car._id%>"
-                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
+                                    class="block2-btn flex-c-m stext-103 text-light size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
                                     Quick View
                                 </a>
                             </div>
-                            
+
                             <div class="block2-txt flex-w flex-t p-t-14">
                                 <div class="block2-txt-child1 flex-col-l ">
                                     <a href="product-detail.html"
-                                        class="mtext-103 cl4 hov-cl10 trans-04 js-name-b2 p-b-6 "
+                                        class="mtext-103 text-light hov-cl10 trans-04 js-name-b2 p-b-6 "
                                         style="text-decoration: none;">
                                         <%= car.name%>
                                     </a>
 
-                                    <span class="stext-105 cl5">
+                                    <span class="stext-105 text-light">
                                         <%= car.price%>
                                     </span>
-                                    <span class="stext-105 cl5">
+                                    <span class="stext-105 text-light">
                                         Availiable Tickets : <%= car.ticket%>
                                     </span>
                                 </div>
@@ -322,8 +312,8 @@ https://templatemo.com/tm-559-zay-shop
             </div>
 
             <!-- Load more -->
-            <div class="flex-c-m flex-w w-full p-t-45">
-                <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+            <div class="flex-c-m bg-dark flex-w w-full p-t-45">
+                <a href="#" class="flex-c-m stext-101 bg-dark text-light size-103 bg2 bor1 hov-btn2 p-lr-15 trans-05">
                     Load More
                 </a>
             </div>
@@ -332,30 +322,30 @@ https://templatemo.com/tm-559-zay-shop
 
 
     <!-- Start Footer -->
-    <footer class="bg-dark" id="tempaltemo_footer">
+    <footer class="bg-black" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Zay Shop</h2>
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Sefage Cars</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
-                            <i class="fas fa-map-marker-alt fa-fw"></i>
+                            <i class="fas fa-map-marker-alt fa-fw text-light"></i>
                             123 Consectetur at ligula 10660
                         </li>
                         <li>
-                            <i class="fa fa-phone fa-fw"></i>
-                            <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                            <i class="fa fa-phone fa-fw text-light"></i>
+                            <a class="text-decoration-none text-light" href="tel:010-020-0340">010-020-0340</a>
                         </li>
                         <li>
-                            <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                            <i class="fa fa-envelope fa-fw text-light"></i>
+                            <a class="text-decoration-none text-light" href="mailto:info@company.com">info@company.com</a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
+                <div class="col-md-4 pt-5 bg-black">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light ">Products</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a class="text-decoration-none" href="#">Luxury Sedan</a></li>
                         <li><a class="text-decoration-none" href="#">Compact SUVs</a></li>

@@ -12,7 +12,8 @@ const Ticket = require('../Model/tickets');
 const Banner = require('../Model/index')
 const Razorpay = require("razorpay");
 const Order = require('../Model/order');
-const Notification = require('../Model/notification')
+const Notification = require('../Model/notification');
+require('dotenv').config({ path: '.env' });
 
 let msg = "";
 let data = "";
@@ -582,8 +583,8 @@ const order = async (req, res) => {
 
       const razorpayInstance = new Razorpay({
         // key_id:process.env.KEY_ID,
-        key_id: "rzp_test_C9okbWzHpHQQPA", //      
-        key_secret: "xitq4ziAwpE5tPr6LPeDyMFs"
+        key_id: process.env.RazorPay_Key_Id, //      
+        key_secret: process.env.RazorPay_Key_Secret
       })
       razorpayInstance
       let amt = total * (30 / 100)
@@ -887,8 +888,8 @@ const payNow = async (req, res) => {
     });
 
     const razorpayInstance = new Razorpay({
-      key_id: "rzp_test_C9okbWzHpHQQPA",
-      key_secret: "xitq4ziAwpE5tPr6LPeDyMFs"
+      key_id: process.env.RazorPay_Key_Id,
+      key_secret: process.env.RazorPay_Key_Secret
     })
 
     razorpayInstance
