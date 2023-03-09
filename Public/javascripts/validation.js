@@ -34,12 +34,12 @@ function submitform(e){
         showErrorMessage("Name and Password is Required");
         return false;
     }
-    if(password.value!=="jas@12" && email.value!=="jaseer@gmail.com"){
+    if(password.value!=="jas@12" && email.value!=="mjaseer43@gmail.com"){
         
         showErrorMessage("Email & Password is Incorrect");
         return false;
     }
-    if(email.value!=="jaseer@gmail.com"  ){
+    if(email.value!=="mjaseer43@gmail.com"  ){
         
         showErrorMessage("Email is incorrect");
         return false;
