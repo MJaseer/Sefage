@@ -391,8 +391,7 @@
                                             <th>City</th>
                                             <th>Appartment</th>
                                             <th>Status</th>
-                                            <th>Button</th>
-                                            <th>Button</th>
+                                            <th>Action</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
@@ -405,8 +404,7 @@
                                             <th>City</th>
                                             <th>Appartment</th>
                                             <th>Status</th>
-                                            <th>Button</th>
-                                            <th>Button</th>
+                                            <th>Action</th>
                                             <th>Delete</th>
                                         </tr>
                                     </tfoot>
@@ -435,8 +433,11 @@
                                                 <td>
                                                     <%= user.status%>
                                                 </td>
+                                                <% if (user.status == "Active" ){ %>
                                                 <td><a href="/admin/block?id=<%= user._id%>">Block</a></td>
+                                                <% } else { %>
                                                 <td><a href="/admin/unBlock?id=<%= user._id%>">Unblock</a></td>
+                                                <% } %>
                                                 <td><a href="/admin/delete?id=<%= user._id%>">Delete</a></td>
                                             </tr>
                                             <%= i++%>
