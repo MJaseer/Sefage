@@ -1,6 +1,5 @@
 const express = require('express');
 const User = require('../Model/user')
-const Admin = require('../Model/admin');
 const bcrypt = require('bcrypt');
 const Cars = require('../Model/cars');
 const Coupon = require('../Model/coupon')
@@ -19,22 +18,15 @@ const getlogin = async (req, res, next) => {
 };
 
 const postlogin = async (req, res) => {
+  console.log(5);
+  const email = req.body.email;
   try {
-    const email = req.body.email;
-    const password = req.body.password;
-    const admin = await Admin.findOne({ email: email });
-    console.log("database details");
-    if (admin) {
-      if (email === admin.email && password === admin.password) {
-        req.session.email = req.body.email;
-        console.log("session created");
-        res.redirect("/admin/home");
-      } else {
-        res.redirect("/admin", {});
-      }
-    } else {
-      res.redirect("/admin");
+    req.session.email = email;
+    if(req.session.email){
+      console.log("awersfghijoksdfghj");
     }
+    console.log("homme");
+    res.redirect("/admin/home");
   } catch (error) {
     console.log(error.message);
   }
@@ -260,7 +252,7 @@ const couponPost = async (req, res) => {
       discount: req.body.discount,
       maximumDiscountAmount: req.body.maxAmount,
       minimumAmount: req.body.minAmount,
-      users: [{ userId: null }] 
+      users: [{ userId: null }]
     })
     coupon.save().then(() => {
       res.redirect('/admin/coupon');
