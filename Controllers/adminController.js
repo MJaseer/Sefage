@@ -22,11 +22,10 @@ const postlogin = async (req, res) => {
   const email = req.body.email;
   try {
     req.session.email = email;
-    if(req.session.email){
-      console.log("awersfghijoksdfghj");
+    if (req.session.email) {
+      console.log("homme");
+      res.redirect("/admin/home");
     }
-    console.log("homme");
-    res.redirect("/admin/home");
   } catch (error) {
     console.log(error.message);
   }
