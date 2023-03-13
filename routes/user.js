@@ -1,12 +1,5 @@
 const express = require('express');
 const router = express.Router();
-// const User = require('../Model/user');
-// const Cars = require('../Model/cars');
-// const Location = require('../Model/state');
-// const Ticket = require('../Model/tickets');
-// const Coupon = require('../Model/coupon');
-// const crypto = require('crypto');
-// const order = require('../Model/order')
 const userContoller = require('../Controllers/userController');
 const { verifyLoginUser, Nosession } = require('../Middlewares/session');
 

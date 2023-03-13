@@ -582,27 +582,23 @@ const order = async (req, res) => {
     if (carDetail.ticket >= count) {
 
       const razorpayInstance = new Razorpay({
-        // key_id:process.env.KEY_ID,
-        key_id: process.env.RazorPay_Key_Id, //      
+        key_id: process.env.RazorPay_Key_Id,
         key_secret: process.env.RazorPay_Key_Secret
       })
+
       razorpayInstance
-      let amt = total * (30 / 100)
+      let amt = total* (30 / 100)
       Math.round(amt);
-      const amount = parseInt(amt);
-      razorpayInstance.orders.create({
+      let amount = parseInt(amt);
+
+      let options = await razorpayInstance.orders.create({
         amount: amount * 100,
         currency: "INR",
         receipt: "" + userData._id,
-      }, (err, order) => {
-        if (err) {
-          msg = err;
-          console.log(err);
-          res.json({ success: false, msg })
-        } else {
-          res.json({ success: true, order, amount, coupon, count, carId, total })
-        }
       })
+      
+      res.json({ success: true, order : options, amount, coupon, count, carId, total })
+      
     } else {
       if (carDetail.ticket == 0) {
         msg = `No tickets are aviliable for ${carDetail.brand} ${carDetail.name}`;

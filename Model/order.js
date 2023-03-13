@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const moment = require('moment')
 mongoose.set('strictQuery', false);
 
 const orderSchema = new mongoose.Schema({
@@ -18,7 +18,7 @@ const orderSchema = new mongoose.Schema({
         paid: Number,
         time:{
             type:Date,
-            default:Date.now()
+            default:Date.now
         },
         discount: {
             type:Number,
@@ -27,7 +27,7 @@ const orderSchema = new mongoose.Schema({
         status:{
             type:Boolean,
             default:true
-        }
+        },
     }],
 });
 

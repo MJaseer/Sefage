@@ -1,3 +1,5 @@
+
+
 document.querySelector("#paymentForm").addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -17,6 +19,7 @@ document.querySelector("#paymentForm").addEventListener("submit", (e) => {
         .then((response) => response.json())
         .then((order) => {
             toString(order)
+            console.log(JSON.stringify(order));
             if (order.success) {
                 let options = {
                     key: "rzp_test_C9okbWzHpHQQPA",

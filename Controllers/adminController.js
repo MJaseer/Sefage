@@ -5,7 +5,8 @@ const Cars = require('../Model/cars');
 const Coupon = require('../Model/coupon')
 const Category = require('../Model/category');
 const Banner = require('../Model/index');
-const category = require('../Model/category');
+const Order = require('../Model/order')
+const moment = require('moment');
 
 let msg = "";
 
@@ -45,6 +46,95 @@ const gethome = async (req, res) => {
     console.log(error.message);
   }
 }
+
+const categorySales = async (req, res) => {
+  const categories = await Category.find({})
+
+  const categoryNames = categories.map((category) => category.category_name);
+
+  let values = [];
+  const productId = categories.map(category => category.produId);
+  productId.forEach(subArray => values.push(subArray.length));
+
+  if (categoryNames && productId) {
+    res.json({ success: true, categoryNames, values })
+  } else {
+    res.json({ success: false })
+  }
+}
+
+const monthlySales = async (req, res) => {
+  console.log('connected');
+
+  const data = await Order.find()
+    .populate({
+      path: 'carId.carId',
+      model: 'car'
+    })
+
+  const groupedResult = data.reduce((acc, order) => {
+    order.carId.forEach((carOrder) => {
+      const month = carOrder.time.getMonth() + 1;
+      const car = carOrder.carId;
+
+      const existingRecord = acc.find((record) => {
+        return record.month === month;
+      });
+
+      if (existingRecord) {
+        existingRecord.total_quantity += carOrder.quantity;
+        existingRecord.total_payable += carOrder.payable;
+        existingRecord.total_paid += carOrder.paid;
+      } else {
+        acc.push({
+          month,
+          total_quantity: carOrder.quantity,
+        });
+      }
+    });
+
+    return acc;
+  }, []);
+
+  const monthlySales = []
+  groupedResult.forEach((data) => {
+    console.log(data);
+    monthlySales.push(data)    
+  })
+
+  let month = []
+  let values = []
+
+  monthlySales.forEach( data => {
+    month.push(data.month)
+    values.push(data.total_quantity)
+  });values
+
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const getMonthName = (month) => {
+    return monthNames[month - 1];
+  };
+  // month.sort((a,b) => a-b)
+
+  let monthName = []
+
+  for(let i = 0;i < month.length;i++){
+    monthName.push(getMonthName(month[i]))
+  }
+  
+  console.log(monthName);
+  console.log(month);
+  console.log(values);
+
+  res.json({ success: true ,  month : monthName, values})
+
+
+}
+
 
 const block = async (req, res) => {
   try {
@@ -212,6 +302,7 @@ const deleteUser = async (req, res) => {
   res.redirect("/admin/tables");
 }
 
+
 const signout = async (req, res) => {
   req.session.email = null;
   console.log("session deleted");
@@ -241,13 +332,14 @@ const postBanner = async (req, res) => {
 const couponPost = async (req, res) => {
   let code = await Coupon.find({ code: req.body.couponCode })
   if (code.code) {
-    console.log(code);
     msg = "Coupon already exist"
     res.redirect("/admin/coupon");
   } else {
+    const datenow = moment(req.body.expiryDate).format('MMMM YYYY DD');
+    console.log(datenow);
     let coupon = new Coupon({
       code: req.body.couponCode,
-      expireAt: req.body.expiryDate,
+      expireAt: datenow,
       discount: req.body.discount,
       maximumDiscountAmount: req.body.maxAmount,
       minimumAmount: req.body.minAmount,
@@ -308,6 +400,8 @@ module.exports = {
   getlogin,
   postlogin,
   gethome,
+  categorySales,
+  monthlySales,
   block,
   unBlock,
   getcar,

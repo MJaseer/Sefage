@@ -11,6 +11,10 @@ router.post('/login', adminController.postlogin);
 
 router.get('/home', veryfyLoginAdmin, adminController.gethome);
 
+router.post('/categorySales',adminController.categorySales);
+
+router.post('/monthlySales',adminController.monthlySales)
+
 router.get('/block', veryfyLoginAdmin, adminController.block);
 
 router.get('/unBlock', veryfyLoginAdmin, adminController.unBlock);
@@ -49,7 +53,7 @@ router.put('/postEditBanner', veryfyLoginAdmin, upload.array('image', 1), adminC
 
 router.post('/addBanner', veryfyLoginAdmin, upload.array('image', 1), adminController.postAddBanner)
 
-router.get('/deleteBanner',adminController.deleteBanner)
+router.get('/deleteBanner',adminController.deleteBanner);
 
 router.get('/signOut', adminController.signout);
 
