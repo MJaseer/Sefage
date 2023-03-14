@@ -64,74 +64,78 @@ const categorySales = async (req, res) => {
 }
 
 const monthlySales = async (req, res) => {
-  console.log('connected');
+  try {
+    console.log('connected');
 
-  const data = await Order.find()
-    .populate({
-      path: 'carId.carId',
-      model: 'car'
-    })
+    const data = await Order.find()
+      .populate({
+        path: 'carId.carId',
+        model: 'car'
+      })
+    if (data) {
+      const groupedResult = data.reduce((acc, order) => {
+        order.carId.forEach((carOrder) => {
+          const month = carOrder.time.getMonth() + 1;
+          const car = carOrder.carId;
 
-  const groupedResult = data.reduce((acc, order) => {
-    order.carId.forEach((carOrder) => {
-      const month = carOrder.time.getMonth() + 1;
-      const car = carOrder.carId;
+          const existingRecord = acc.find((record) => {
+            return record.month === month;
+          });
 
-      const existingRecord = acc.find((record) => {
-        return record.month === month;
-      });
-
-      if (existingRecord) {
-        existingRecord.total_quantity += carOrder.quantity;
-        existingRecord.total_payable += carOrder.payable;
-        existingRecord.total_paid += carOrder.paid;
-      } else {
-        acc.push({
-          month,
-          total_quantity: carOrder.quantity,
+          if (existingRecord) {
+            existingRecord.total_quantity += carOrder.quantity;
+            existingRecord.total_payable += carOrder.payable;
+            existingRecord.total_paid += carOrder.paid;
+          } else {
+            acc.push({
+              month,
+              total_quantity: carOrder.quantity,
+            });
+          }
         });
+
+        return acc;
+      }, []);
+
+      const monthlySales = []
+      groupedResult.forEach((data) => {
+        console.log(data);
+        monthlySales.push(data)
+      })
+
+      let month = []
+      let values = []
+
+      monthlySales.forEach(data => {
+        month.push(data.month)
+        values.push(data.total_quantity)
+      }); values
+
+      const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+
+      const getMonthName = (month) => {
+        return monthNames[month - 1];
+      };
+      // month.sort((a,b) => a-b)
+
+      let monthName = []
+
+      for (let i = 0; i < month.length; i++) {
+        monthName.push(getMonthName(month[i]))
       }
-    });
 
-    return acc;
-  }, []);
-
-  const monthlySales = []
-  groupedResult.forEach((data) => {
-    console.log(data);
-    monthlySales.push(data)    
-  })
-
-  let month = []
-  let values = []
-
-  monthlySales.forEach( data => {
-    month.push(data.month)
-    values.push(data.total_quantity)
-  });values
-
-  const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-
-  const getMonthName = (month) => {
-    return monthNames[month - 1];
-  };
-  // month.sort((a,b) => a-b)
-
-  let monthName = []
-
-  for(let i = 0;i < month.length;i++){
-    monthName.push(getMonthName(month[i]))
+      res.json({ success: true, month: monthName, values })
+    } else {
+      msg = " No data found"
+      res.json({ success: false, msg })
+    }
+  } catch (err) {
+    msg= " Uncensored error occured"
+    res.json({ success: false, msg })
   }
-  
-  console.log(monthName);
-  console.log(month);
-  console.log(values);
-
-  res.json({ success: true ,  month : monthName, values})
-
 
 }
 
