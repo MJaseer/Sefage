@@ -643,11 +643,11 @@ const verifyPayment = async (req, res) => {
 
       if (currentUser) {
 
-        const existingCar = await Ticket.findOne({ 'carId.carId': carId });
+        const existingCar = await Ticket.findOne({ userId: userData._id,'carId.carId': carId });
 
         if (existingCar) {
 
-          await Ticket.findOneAndUpdate({ "carId.carId": carId },
+          await Ticket.findOneAndUpdate({ userId: userData._id,"carId.carId": carId },
             {
               $inc: {
                 "carId.$.quantity": count,
