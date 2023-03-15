@@ -46,15 +46,38 @@ const gethome = async (req, res) => {
 }
 
 const categorySales = async (req, res) => {
-  const categories = await Category.find({})
 
-  const categoryNames = categories.map((category) => category.category_name);
+  const data = await Order.find()
+    .populate({
+      path: 'carId.carId',
+      model: 'car',
+      populate: [
+        {
+          path: "category",
+          model: "category"
+        }
+      ]
+    })
+    let categoryNames = [];
+    let ids = []
+  const categoryName = data.map((category) => {
+    category.carId.forEach(data => {
+      ids.push(data.carId.category._id)
+      categoryNames.push(data.carId.category.category_name)
+    })
+  });
 
-  let values = [];
-  const productId = categories.map(category => category.produId);
-  productId.forEach(subArray => values.push(subArray.length));
+  let value =  ids.reduce((acc, id) => {
+    const idString = id.toString();
+    acc[idString] = acc[idString] ? acc[idString] + 1 : 1;
 
-  if (categoryNames && productId) {
+    return acc;
+  }, {});
+
+  let values = Object.values(value);
+
+  if (categoryNames) {
+    console.log(values, categoryNames);
     res.json({ success: true, categoryNames, values })
   } else {
     res.json({ success: false })
@@ -180,24 +203,24 @@ const getTable = async (req, res) => {
 };
 
 const orderList = async (req, res) => {
-  try{
-    
-  const orders = await Order.find({}).populate('userId')
-    .populate({
-      path: "carId.carId",
-      model: "car",
-      populate: [
-        {
-          path: "category",
-          model: "category"
-        }
-      ]
-    })
+  try {
 
-  res.render('admin/orderlist', { orders })
-}catch{
-  res.redirect('/admin/404')
-}
+    const orders = await Order.find({}).populate('userId')
+      .populate({
+        path: "carId.carId",
+        model: "car",
+        populate: [
+          {
+            path: "category",
+            model: "category"
+          }
+        ]
+      })
+
+    res.render('admin/orderlist', { orders })
+  } catch {
+    res.redirect('/admin/404')
+  }
 }
 
 
