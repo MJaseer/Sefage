@@ -12,13 +12,11 @@ function showErrorMessage(message) {
 }
 
 function submitform(e) {
-
+    console.log('dxfcghjkl;');
+    
     const form = document.querySelector("form");
     const email = document.querySelector("input[type=email]");
     const password = document.querySelector("input[type=password]");
-
-
-    console.log("apsswdo");
 
     if (email.value === "" && password.value === "") {
 

@@ -6,7 +6,7 @@ const Category = require('../Model/category');
 const Banner = require('../Model/index');
 const Order = require('../Model/order')
 const moment = require('moment');
-const { Router } = require('express');
+require('dotenv').config({ path: '.env' });
 
 let msg = "";
 
@@ -14,16 +14,21 @@ const getlogin = async (req, res, next) => {
   if (req.session.email) {
     res.redirect("/admin/home");
   } else {
-    res.render('admin/login');
+    res.render('admin/login' ,{ msg });
   }
 };
 
 const postlogin = async (req, res) => {
   const email = req.body.email;
   try {
-    req.session.email = email;
-    if (req.session.email) {
-      res.redirect("/admin/home");
+    if (req.body.email == process.env.adminEmail && req.body.password == process.env.adminPassword) {
+      req.session.email = email;
+      if (req.session.email) {
+        res.redirect("/admin/home");
+      }
+    } else {
+      msg = "Invalid Credentials";
+      res.redirect('/admin')
     }
   } catch (error) {
     console.log(error.message);
