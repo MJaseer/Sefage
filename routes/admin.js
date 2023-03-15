@@ -15,6 +15,8 @@ router.post('/categorySales',veryfyLoginAdmin,adminController.categorySales);
 
 router.post('/monthlySales',veryfyLoginAdmin,adminController.monthlySales);
 
+router.get('/salesReport',veryfyLoginAdmin,adminController.salesReport);
+
 router.get('/block', veryfyLoginAdmin, adminController.block);
 
 router.get('/unBlock', veryfyLoginAdmin, adminController.unBlock);

@@ -1,12 +1,12 @@
 const express = require('express');
 const User = require('../Model/user')
-const bcrypt = require('bcrypt');
 const Cars = require('../Model/cars');
 const Coupon = require('../Model/coupon')
 const Category = require('../Model/category');
 const Banner = require('../Model/index');
 const Order = require('../Model/order')
 const moment = require('moment');
+const { Router } = require('express');
 
 let msg = "";
 
@@ -138,7 +138,6 @@ const monthlySales = async (req, res) => {
             });
           }
         });
-
         return acc;
       }, []);
 
@@ -180,6 +179,21 @@ const monthlySales = async (req, res) => {
     res.json({ success: false, msg })
   }
 
+}
+
+
+const salesReport = async (req, res) => {
+  const data = await Order.find({ 'carId.status': true }).populate('userId')
+    .populate({
+      path: 'carId.carId',
+      model: 'car'
+    })
+
+  data.forEach(data => {
+    console.log(data.carId)
+  })
+
+  res.render('admin/salesReport', { data });
 }
 
 
@@ -516,6 +530,7 @@ module.exports = {
   gethome,
   categorySales,
   monthlySales,
+  salesReport,
   block,
   unBlock,
   getcar,
