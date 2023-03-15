@@ -58,14 +58,16 @@ const categorySales = async (req, res) => {
         }
       ]
     })
-    let categoryNames = [];
+    let categoryName = [];
     let ids = []
-  const categoryName = data.map((category) => {
+  const dummy = data.map((category) => {
     category.carId.forEach(data => {
       ids.push(data.carId.category._id)
-      categoryNames.push(data.carId.category.category_name)
+      categoryName.push(data.carId.category.category_name)
     })
   });
+
+  const categoryNames = [...new Set(categoryName)];
 
   let value =  ids.reduce((acc, id) => {
     const idString = id.toString();
@@ -74,7 +76,7 @@ const categorySales = async (req, res) => {
     return acc;
   }, {});
 
-  let values = Object.values(value);
+  let values = Object.values(value);  
 
   if (categoryNames) {
     console.log(values, categoryNames);
