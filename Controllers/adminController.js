@@ -189,10 +189,6 @@ const salesReport = async (req, res) => {
       model: 'car'
     })
 
-  data.forEach(data => {
-    console.log(data.carId)
-  })
-
   res.render('admin/salesReport', { data });
 }
 
