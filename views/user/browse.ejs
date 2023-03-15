@@ -212,52 +212,29 @@ https://templatemo.com/tm-559-zay-shop
                                         Default
                                     </a>
                                 </li>
+                                <li class="p-b-6">
+                                    <a role="button" class="filter-link stext-106 trans-04" id="highToLow">
+                                        High to Low
+                                    </a>
+                                </li>
+                                <li class="p-b-6">
+                                    <a role="button" class="filter-link stext-106 trans-04" id="lowToHigh">
+                                        Low to High
+                                    </a>
+                                </li>
                             </ul>
                         </div>
 
                         <div class="filter-col2 p-r-15 p-b-27">
-                            <div class="mtext-102 cl2 p-b-15">
-                                Price
-                            </div>
 
-                            <ul>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                        All
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
 
                         <div class="filter-col3 p-r-15 p-b-27">
-                            <div class="mtext-102 cl2 p-b-15">
-                                Color
-                            </div>
 
-                            <ul>
-                                <li class="p-b-6">
-                                    <span class="fs-15 lh-12 m-r-6" style="color: #222;">
-                                        <i class="zmdi zmdi-circle"></i>
-                                    </span>
-
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        Black
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
 
                         <div class="filter-col4 p-b-27">
-                            <div class="mtext-102 cl2 p-b-15">
-                                Tags
-                            </div>
 
-                            <div class="flex-w p-t-4 m-r--5">
-                                <a href="#"
-                                    class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                    Fashion
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -429,9 +406,6 @@ https://templatemo.com/tm-559-zay-shop
         </span>
     </div>
 
-    <!-- Modal1 -->
-
-
     <!-- Start Script -->
 
     <script>
@@ -456,7 +430,7 @@ https://templatemo.com/tm-559-zay-shop
                         const itemsContainer = document.querySelector('.isotope-grid');
                         itemsContainer.innerHTML = '';
                         items.search.forEach(item => {
-                            const html = `<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${item.category}    ">
+                            const html = `<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${item.category}">
 
 <!-- Block2 -->
 <div class="block2 ">
@@ -500,13 +474,147 @@ https://templatemo.com/tm-559-zay-shop
     </div>
 </div>
 </div>`
-itemsContainer.insertAdjacentHTML('beforeend', html)
+                            itemsContainer.insertAdjacentHTML('beforeend', html)
                         })
-                    }else {
+                    } else {
                         document.querySelector('.isotope-grid').innerHTML = "No Data Found"
                     }
                 })
         }
+
+
+        const sortSelectLow = document.getElementById('lowToHigh');
+        sortSelectLow.addEventListener('click', () => {
+            fetch(`/sortLowToHigh`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => response.json())
+                .then(items => {
+                    if (items.success) {
+                        const itemsContainer = document.querySelector('.isotope-grid');
+                        itemsContainer.innerHTML = '';
+                        items.item.forEach(item => {
+                            const html = `<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${item.category}">
+
+<!-- Block2 -->
+<div class="block2 ">
+    <div class="block2-pic hov-img0">
+        <img height="130vh" width="130vh" src="/${item.image[1].path}" alt="Car Image">
+
+        <a href="/productDetail?id=${item._id}"
+            class="block2-btn flex-c-m stext-103 text-light size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
+            Quick View
+        </a>
+    </div>
+
+    <div class="block2-txt flex-w flex-t p-t-14">
+        <div class="block2-txt-child1 flex-col-l ">
+            <a href="product-detail.html"
+                class="mtext-103 text-light hov-cl10 trans-04 js-name-b2 p-b-6 "
+                style="text-decoration: none;">
+                ${item.name}
+            </a>
+
+            <span class="stext-105 text-light">
+                ${item.price}
+            </span>
+            <span class="stext-105 text-light">
+                Availiable Tickets : ${item.ticket}
+            </span>
+        </div>
+
+        <div class="block2-txt-child2 flex-r p-t-3">
+            <a href="/addLike?id=${item._id}"
+                class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                <button type="button" data-toggle="modal" data-target="#exampleModal"
+                    id="changeImageBtn">
+                    <img class="icon-heart1 dis-block trans-04  far fa-heart" id="myImage"
+                        src="/images/icons/icon-heart-01.png" alt="ICON">
+                </button>
+                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                    src="/images/icons/icon-heart-02.png" alt="ICON">
+            </a>
+        </div>
+    </div>
+</div>
+</div>`
+                            itemsContainer.insertAdjacentHTML('beforeend', html)
+                        })
+                    } else {
+                        document.querySelector('.isotope-grid').innerHTML = "No Data Found"
+                    }
+                })
+
+        })
+
+        const sortSelectHigh = document.getElementById('highToLow');
+        sortSelectHigh.addEventListener('click', () => {
+            fetch(`/sortHighToLow`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => response.json())
+                .then(items => {
+                    if (items.success) {
+                        const itemsContainer = document.querySelector('.isotope-grid');
+                        itemsContainer.innerHTML = '';
+                        items.item.forEach(item => {
+                            const html = `<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${item.category}">
+
+<!-- Block2 -->
+<div class="block2 ">
+    <div class="block2-pic hov-img0">
+        <img height="130vh" width="130vh" src="/${item.image[1].path}" alt="Car Image">
+
+        <a href="/productDetail?id=${item._id}"
+            class="block2-btn flex-c-m stext-103 text-light size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
+            Quick View
+        </a>
+    </div>
+
+    <div class="block2-txt flex-w flex-t p-t-14">
+        <div class="block2-txt-child1 flex-col-l ">
+            <a href="product-detail.html"
+                class="mtext-103 text-light hov-cl10 trans-04 js-name-b2 p-b-6 "
+                style="text-decoration: none;">
+                ${item.name}
+            </a>
+
+            <span class="stext-105 text-light">
+                ${item.price}
+            </span>
+            <span class="stext-105 text-light">
+                Availiable Tickets : ${item.ticket}
+            </span>
+        </div>
+
+        <div class="block2-txt-child2 flex-r p-t-3">
+            <a href="/addLike?id=${item._id}"
+                class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                <button type="button" data-toggle="modal" data-target="#exampleModal"
+                    id="changeImageBtn">
+                    <img class="icon-heart1 dis-block trans-04  far fa-heart" id="myImage"
+                        src="/images/icons/icon-heart-01.png" alt="ICON">
+                </button>
+                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                    src="/images/icons/icon-heart-02.png" alt="ICON">
+            </a>
+        </div>
+    </div>
+</div>
+</div>`
+                            itemsContainer.insertAdjacentHTML('beforeend', html)
+                        })
+                    } else {
+                        document.querySelector('.isotope-grid').innerHTML = "No Data Found"
+                    }
+                })
+        })
     </script>
 
 

@@ -30,6 +30,10 @@ router.get('/browse', userContoller.getBrowse);
 
 router.post('/productSearch',userContoller.postSearch);
 
+router.post('/sortLowToHigh',userContoller.postSortLowToHigh)
+
+router.post('/sortHighToLow',userContoller.postSorHighToLow)
+
 router.get('/about', (req, res) => {
   res.render('user/about')
 });

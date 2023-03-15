@@ -466,6 +466,25 @@ const postSearch = async (req, res) => {
   }
 }
 
+postSortLowToHigh = async (req, res) => {
+  const item = await Cars.find().sort({ price: 1 })
+  console.log(item);
+  if (item) {
+    res.json({ success: true, item })
+  } else {
+    res.json({ success: false })
+  }
+}
+
+postSorHighToLow = async (req, res) => {
+  const item = await Cars.find().sort({ price: -1 })
+  console.log(item);
+  if (item) {
+    res.json({ success: true, item })
+  } else {
+    res.json({ success: false })
+  }
+}
 
 const addlike = async (req, res) => {
   try {
@@ -599,7 +618,7 @@ const order = async (req, res) => {
       })
 
       razorpayInstance
-      let amt = total* (30 / 100)
+      let amt = total * (30 / 100)
       Math.round(amt);
       let amount = parseInt(amt);
 
@@ -608,9 +627,9 @@ const order = async (req, res) => {
         currency: "INR",
         receipt: "" + userData._id,
       })
-      
-      res.json({ success: true, order : options, amount, coupon, count, carId, total })
-      
+
+      res.json({ success: true, order: options, amount, coupon, count, carId, total })
+
     } else {
       if (carDetail.ticket == 0) {
         msg = `No tickets are aviliable for ${carDetail.brand} ${carDetail.name}`;
@@ -655,11 +674,11 @@ const verifyPayment = async (req, res) => {
 
       if (currentUser) {
 
-        const existingCar = await Ticket.findOne({ userId: userData._id,'carId.carId': carId });
+        const existingCar = await Ticket.findOne({ userId: userData._id, 'carId.carId': carId });
 
         if (existingCar) {
 
-          await Ticket.findOneAndUpdate({ userId: userData._id,"carId.carId": carId },
+          await Ticket.findOneAndUpdate({ userId: userData._id, "carId.carId": carId },
             {
               $inc: {
                 "carId.$.quantity": count,
@@ -850,7 +869,7 @@ const cancelOrder = async (req, res) => {
   if (!data) {
     res.json({ success: false, err })
   } else {
-    let carData  ;
+    let carData;
     data.carId.forEach(async (data) => {
       carData = data
       await Ticket.findOneAndUpdate({ "carId.carId": data.carId },
@@ -865,7 +884,7 @@ const cancelOrder = async (req, res) => {
     })
     await Cars.findOneAndUpdate({ _id: carData.carId },
       {
-        $inc:{
+        $inc: {
           ticket: carData.quantity
         }
       })
@@ -996,6 +1015,8 @@ module.exports = {
   deleteMe,
   getBrowse,
   postSearch,
+  postSortLowToHigh,
+  postSorHighToLow,
   signOut,
   postOtp,
   getOtp,
