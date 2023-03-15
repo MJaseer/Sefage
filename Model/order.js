@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const moment = require('moment')
 mongoose.set('strictQuery', false);
 
 const orderSchema = new mongoose.Schema({
