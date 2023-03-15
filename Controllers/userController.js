@@ -476,13 +476,34 @@ postSortLowToHigh = async (req, res) => {
   }
 }
 
-postSorHighToLow = async (req, res) => {
+postSortHighToLow = async (req, res) => {
   const item = await Cars.find().sort({ price: -1 })
   console.log(item);
   if (item) {
     res.json({ success: true, item })
   } else {
     res.json({ success: false })
+  }
+}
+
+const categoryFilter = async (req, res) => {
+  const data = req.query.id
+  if (data !== 'all') {
+    const item = await Cars.find({ category: data })
+    console.log(item);
+    if (item) {
+      res.json({ success: true, item })
+    } else {
+      res.json({ success: false })
+    }
+  }else{
+    const item = await Cars.find()
+    console.log(item);
+    if (item) {
+      res.json({ success: true, item })
+    } else {
+      res.json({ success: false })
+    }
   }
 }
 
@@ -1016,7 +1037,8 @@ module.exports = {
   getBrowse,
   postSearch,
   postSortLowToHigh,
-  postSorHighToLow,
+  postSortHighToLow,
+  categoryFilter,
   signOut,
   postOtp,
   getOtp,

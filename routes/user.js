@@ -32,7 +32,9 @@ router.post('/productSearch',userContoller.postSearch);
 
 router.post('/sortLowToHigh',userContoller.postSortLowToHigh)
 
-router.post('/sortHighToLow',userContoller.postSorHighToLow)
+router.post('/sortHighToLow',userContoller.postSortHighToLow);
+
+router.post('/categoryFilter',userContoller.categoryFilter)
 
 router.get('/about', (req, res) => {
   res.render('user/about')
