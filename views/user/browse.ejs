@@ -178,7 +178,8 @@ https://templatemo.com/tm-559-zay-shop
                         Filter
                     </div>
 
-                    <div class="flex-c-m stext-106 text-light size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                    <div
+                        class="flex-c-m stext-106 text-light size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
                         <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
                         <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
                         Search
@@ -193,7 +194,7 @@ https://templatemo.com/tm-559-zay-shop
                         </button>
 
                         <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
-                            placeholder="Search">
+                            placeholder="Search" onchange="return searchProduct('hi')" id="productSearch">
                     </div>
                 </div>
 
@@ -339,7 +340,8 @@ https://templatemo.com/tm-559-zay-shop
                         </li>
                         <li>
                             <i class="fa fa-envelope fa-fw text-light"></i>
-                            <a class="text-decoration-none text-light" href="mailto:info@company.com">info@company.com</a>
+                            <a class="text-decoration-none text-light"
+                                href="mailto:info@company.com">info@company.com</a>
                         </li>
                     </ul>
                 </div>
@@ -431,6 +433,83 @@ https://templatemo.com/tm-559-zay-shop
 
 
     <!-- Start Script -->
+
+    <script>
+
+        function searchProduct(dummy) {
+            const data = document.getElementById('productSearch').value
+
+            console.log(data);
+
+            fetch('/productSearch', {
+                method: "POST",
+                body: JSON.stringify({
+                    data
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then((response) => response.json())
+                .then((items) => {
+                    if (items.success) {
+                        const itemsContainer = document.querySelector('.isotope-grid');
+                        itemsContainer.innerHTML = '';
+                        items.search.forEach(item => {
+                            const html = `<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${item.category}    ">
+
+<!-- Block2 -->
+<div class="block2 ">
+    <div class="block2-pic hov-img0">
+        <img height="130vh" width="130vh" src="/${item.image[1].path}" alt="Car Image">
+
+        <a href="/productDetail?id=${item._id}"
+            class="block2-btn flex-c-m stext-103 text-light size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
+            Quick View
+        </a>
+    </div>
+
+    <div class="block2-txt flex-w flex-t p-t-14">
+        <div class="block2-txt-child1 flex-col-l ">
+            <a href="product-detail.html"
+                class="mtext-103 text-light hov-cl10 trans-04 js-name-b2 p-b-6 "
+                style="text-decoration: none;">
+                ${item.name}
+            </a>
+
+            <span class="stext-105 text-light">
+                ${item.price}
+            </span>
+            <span class="stext-105 text-light">
+                Availiable Tickets : ${item.ticket}
+            </span>
+        </div>
+
+        <div class="block2-txt-child2 flex-r p-t-3">
+            <a href="/addLike?id=${item._id}"
+                class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                <button type="button" data-toggle="modal" data-target="#exampleModal"
+                    id="changeImageBtn">
+                    <img class="icon-heart1 dis-block trans-04  far fa-heart" id="myImage"
+                        src="/images/icons/icon-heart-01.png" alt="ICON">
+                </button>
+                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                    src="/images/icons/icon-heart-02.png" alt="ICON">
+            </a>
+        </div>
+    </div>
+</div>
+</div>`
+itemsContainer.insertAdjacentHTML('beforeend', html)
+                        })
+                    }else {
+                        document.querySelector('.isotope-grid').innerHTML = "No Data Found"
+                    }
+                })
+        }
+    </script>
+
+
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.magnific-popup.min.js"></script>

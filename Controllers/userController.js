@@ -454,6 +454,18 @@ const getBrowse = async (req, res) => {
   }
 }
 
+const postSearch = async (req, res) => {
+  const data = req.body.data
+  console.log(data, 'data');
+  const search = await Cars.find({ name: { $regex: new RegExp(data, "i") } })
+  console.log(search, 'search');
+  if (search) {
+    res.json({ success: true, search })
+  } else {
+    res.json({ success: false, search })
+  }
+}
+
 
 const addlike = async (req, res) => {
   try {
@@ -983,6 +995,7 @@ module.exports = {
   getProfile,
   deleteMe,
   getBrowse,
+  postSearch,
   signOut,
   postOtp,
   getOtp,

@@ -28,6 +28,7 @@ router.get('/deleteMe', userContoller.deleteMe);
 
 router.get('/browse', userContoller.getBrowse);
 
+router.post('/productSearch',userContoller.postSearch);
 
 router.get('/about', (req, res) => {
   res.render('user/about')
