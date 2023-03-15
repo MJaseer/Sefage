@@ -180,6 +180,8 @@ const getTable = async (req, res) => {
 };
 
 const orderList = async (req, res) => {
+  try{
+    
   const orders = await Order.find({}).populate('userId')
     .populate({
       path: "carId.carId",
@@ -192,14 +194,10 @@ const orderList = async (req, res) => {
       ]
     })
 
-
-  orders.forEach(data => {
-    data.carId.forEach((carData) => {
-
-    })
-  })
-
   res.render('admin/orderlist', { orders })
+}catch{
+  res.redirect('/admin/404')
+}
 }
 
 
