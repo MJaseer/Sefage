@@ -33,11 +33,33 @@ const postlogin = async (req, res) => {
 const gethome = async (req, res) => {
 
   try {
-    User.find({}, (err, userdetails) => {
+    User.find({}, async (err, userdetails) => {
       if (err) {
         console.log(err);
       } else {
-        res.render("admin/home", { details: userdetails });
+        const data = await Order.find()
+          .populate({
+            path: 'carId.carId',
+            model: 'car',
+            populate: [
+              {
+                path: "category",
+                model: "category"
+              }
+            ]
+          })
+
+        let categoryName = [];
+        let ids = []
+        data.forEach((category) => {
+          category.carId.forEach(data => {
+            ids.push(data.carId.category._id)
+            categoryName.push(data.carId.category.category_name)
+          })
+        });
+        const categoryNames = [...new Set(categoryName)];
+
+        res.render("admin/home", { details: userdetails, categoryNames });
       }
     });
   } catch (error) {
@@ -58,9 +80,9 @@ const categorySales = async (req, res) => {
         }
       ]
     })
-    let categoryName = [];
-    let ids = []
-  const dummy = data.map((category) => {
+  let categoryName = [];
+  let ids = []
+  data.forEach((category) => {
     category.carId.forEach(data => {
       ids.push(data.carId.category._id)
       categoryName.push(data.carId.category.category_name)
@@ -69,16 +91,16 @@ const categorySales = async (req, res) => {
 
   const categoryNames = [...new Set(categoryName)];
 
-  let value =  ids.reduce((acc, id) => {
+  let value = ids.reduce((acc, id) => {
     const idString = id.toString();
     acc[idString] = acc[idString] ? acc[idString] + 1 : 1;
 
     return acc;
   }, {});
 
-  let values = Object.values(value);  
+  let values = Object.values(value);
 
-  if (categoryNames) {
+  if (categoryNames && values) {
     console.log(values, categoryNames);
     res.json({ success: true, categoryNames, values })
   } else {
