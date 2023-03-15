@@ -1,0 +1,32 @@
+.boxer {
+    display: table;
+    border-collapse: collapse;
+  }
+  .boxer .box-row {
+    display: table-row;
+  }
+  .boxer .box-row:first-child {
+    font-weight:bold;
+  }
+  .boxer .box {
+    display: table-cell;
+    vertical-align: top;
+    border: 1px solid black;
+    padding: 5px;
+    font-family:monospace;
+  }
+  .boxer .ebay {
+    padding:5px 1.5em;
+  }
+  .boxer .google {
+    padding:5px 1.5em;
+  }
+  .boxer .amazon {
+    padding:5px 1.5em;
+  }
+  .center {
+    text-align:center;
+  }
+  .right {
+    float:right;
+  }

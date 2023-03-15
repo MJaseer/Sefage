@@ -828,6 +828,7 @@ const myOrder = async (req, res) => {
 
 const cancelOrder = async (req, res) => {
   const id = req.body.orderId;
+  console.log(id);
   let data = await Order.findOneAndUpdate({ "carId._id": id }, {
     $set: {
       "carId.$.status": false

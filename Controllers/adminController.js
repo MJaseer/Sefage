@@ -19,12 +19,10 @@ const getlogin = async (req, res, next) => {
 };
 
 const postlogin = async (req, res) => {
-  console.log(5);
   const email = req.body.email;
   try {
     req.session.email = email;
     if (req.session.email) {
-      console.log("homme");
       res.redirect("/admin/home");
     }
   } catch (error) {
@@ -99,7 +97,6 @@ const monthlySales = async (req, res) => {
 
       const monthlySales = []
       groupedResult.forEach((data) => {
-        console.log(data);
         monthlySales.push(data)
       })
 
@@ -119,7 +116,6 @@ const monthlySales = async (req, res) => {
       const getMonthName = (month) => {
         return monthNames[month - 1];
       };
-      // month.sort((a,b) => a-b)
 
       let monthName = []
 
@@ -133,7 +129,7 @@ const monthlySales = async (req, res) => {
       res.json({ success: false, msg })
     }
   } catch (err) {
-    msg= " Uncensored error occured"
+    msg = " Uncensored error occured"
     res.json({ success: false, msg })
   }
 
@@ -183,6 +179,75 @@ const getTable = async (req, res) => {
   }
 };
 
+const orderList = async (req, res) => {
+  const orders = await Order.find({}).populate('userId')
+    .populate({
+      path: "carId.carId",
+      model: "car",
+      populate: [
+        {
+          path: "category",
+          model: "category"
+        }
+      ]
+    })
+
+
+  orders.forEach(data => {
+    data.carId.forEach((carData) => {
+
+    })
+  })
+
+  res.render('admin/orderlist', { orders })
+}
+
+
+const viewItem = async (req, res) => {
+  const id = req.params.id;
+
+  const product = await Order.findOne({ 'carId._id': id }).populate('userId')
+    .populate({
+      path: 'carId.carId',
+      model: 'car',
+      populate: [
+        {
+          path: "category",
+          model: "category"
+        }
+      ]
+    })
+  console.log(id);
+
+  const foundObject = product.carId.find(obj => obj._id.toString() === id);
+  console.log(foundObject);
+
+  if (product) {
+    res.render('admin/orderDetail', { product, foundObject })
+  } else {
+    msg = 'No data found'
+    res.render('admin/orderDetail', { msg })
+  }
+
+}
+
+const cancelOrder = async (req, res) => {
+
+  const id = req.params.id
+
+  const product = await Order.findOneAndUpdate({ "carId._id": id }, {
+    $set: {
+      "carId.$.status": false
+    }
+  })
+  console.log(product);
+  if (!product) {
+    res.json({ success: false })
+  } else {
+    res.json({ success: true })
+  }
+
+}
 
 const getcar = async (req, res) => {
   try {
@@ -297,7 +362,8 @@ const postCategory = async (req, res) => {
       res.redirect('/admin/category');
     }
   } catch {
-    console.log("category not added")
+    msg = "Unexpected error occured"
+    res.redirect('/500')
   }
 }
 
@@ -309,7 +375,6 @@ const deleteUser = async (req, res) => {
 
 const signout = async (req, res) => {
   req.session.email = null;
-  console.log("session deleted");
   res.redirect("/admin");
   res.end();
 }
@@ -416,6 +481,9 @@ module.exports = {
   deletecar,
   signout,
   getTable,
+  orderList,
+  viewItem,
+  cancelOrder,
   postCategory,
   getCategory,
   deleteUser,
