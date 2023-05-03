@@ -13,7 +13,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
 
     <!-- Custom fonts for this template-->
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/html">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -42,43 +42,33 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" name="fname" required="true"
-                                            class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name" pattern=".*[a-zA-Z].*" required
-                                            oninvalid="this.setCustomValidity('Please enter a value with at least one letter')">
+                                            class="form-control form-control-user" id="fname" placeholder="First Name"
+                                            required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" name="lname" required="true"
-                                            class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name" pattern=".*[a-zA-Z].*" required
-                                            oninvalid="this.setCustomValidity('Please enter a value with at least one letter')">
+                                            class="form-control form-control-user" id="sname" placeholder="Last Name"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="email" name="email" required="true"
-                                            class="form-control form-control-user" id="exampleInputEmail"
-                                            placeholder="Email Address">
+                                            class="form-control form-control-user" placeholder="Email Address">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="number" name="phone" required="true"
-                                            class="form-control form-control-user" id="exampleInputEmail"
-                                            placeholder="Mobile Number" pattern="^[0]?[6789]\d{9}$" required
-                                            oninvalid="this.setCustomValidity('Please enter a valid 10-digit Indian phone number')"
-                                            onchange="this.setCustomValidity('')">
+                                        <input type="number" name="phone" class="form-control form-control-user"
+                                            placeholder="Mobile Number" id="Phnumber" inputmode="numeric">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" name="password" required="true"
-                                            class="form-control form-control-user" id="password" placeholder="Password"
-                                            pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}$"
-                                            required
-                                            oninvalid="this.setCustomValidity('Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long.')"
-                                            oninput="this.setCustomValidity('')">
+                                            class="form-control form-control-user" id="password" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" name="cpassword" required="true"
-                                            class="form-control form-control-user" id="exampleRepeatPassword"
+                                            class="form-control form-control-user" id="cpassword"
                                             placeholder="Confirm Password">
                                     </div>
                                 </div>
@@ -126,9 +116,14 @@
     </div>
 
     <script>
-        const form = document.querySelector("form");
-        const password = form.querySelector("#password")
-        const errorElement = form.querySelector("#error");
+        const password = document.getElementById("password");
+        const cpassword = document.getElementById('cpassword')
+        const errorElement = document.getElementById("error");
+        const Phnumber = document.getElementById('Phnumber');
+        const fname = document.getElementById('fname');
+        const sname = document.getElementById('sname');
+
+
 
 
         function hideErrorMessage() {
@@ -142,15 +137,29 @@
         }
 
         function submitform(e) {
-            if (password.value.length < 6 || password.value.trim() == "") {
+            if (fname.value.trim() == '') {
+                showErrorMessage("First name must include atleast One letter");
+                return false;
+            } else if (sname.value.trim() == '') {
+                showErrorMessage("Second name must include atleast One letter");
+                return false;
+            } else if (Phnumber.value.trim().length < 10 || Phnumber.value.trim().length > 10) {
+                showErrorMessage('Phone number should be 10 numbers');
+                return false;
+            } else if (password.value.trim().length < 6 || password.value.trim() == "") {
                 showErrorMessage("Password must be minimum 6 characters");
                 return false;
-            } if (password.value.length > 12) {
+            } else if (password.value.trim().length > 12) {
                 showErrorMessage("Password must be Lessthan 13 characters");
                 return false;
+            } else if (cpassword.value != password.value.trim()) {
+                console.log(cpassword.value);
+                showErrorMessage("Confirm password should be same as password");
+                return false;
+            } else {
+                hideErrorMessage()
+                return true;
             }
-            hideErrorMessage()
-            return true;
         }
 
 

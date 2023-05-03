@@ -63,7 +63,7 @@ const gethome = async (req, res) => {
           })
         });
         const categoryNames = [...new Set(categoryName)];
-
+        msg='';
         res.render("admin/home", { details: userdetails, categoryNames });
       }
     });

@@ -36,7 +36,7 @@ const getHome = async (req, res) => {
   } catch (error) {
     msg = error
     res.redirect('/500', { msg })
-    res.redirect((500), '/500', { msg })
+    // res.redirect((500), '/500', { msg })
   }
 }
 
@@ -87,6 +87,7 @@ const postLogin = async (req, res) => {
 const getSignUp = (req, res) => {
   try {
     res.render('user/register', { msg })
+    msg=''
   } catch (err) {
     msg = err
     res.redirect('/404')
@@ -141,7 +142,6 @@ const postSignUp = async (req, res) => {
         });
       }
     } else {
-      msg = "Confirm password should be same as Password"
       res.redirect('/signUp');
     }
   } catch (error) {
@@ -440,8 +440,12 @@ const getBrowse = async (req, res) => {
   try {
     await Cars.find().populate("category");
     const category = await Category.find();
-    const cars = await Cars.find();
+    const cars = await Cars.find();   
     if (cars) {
+      console.log('cars');
+      cars.forEach((car) => {
+        console.log(JSON.stringify(cars),'image')
+      })
       res.render('user/browse', { cars, category, msg })
       msg = "";
     } else {
@@ -449,6 +453,7 @@ const getBrowse = async (req, res) => {
       res.redirect('/')
     }
   } catch (err) {
+    console.log(err);
     msg = err
     res.redirect('/404')
   }
