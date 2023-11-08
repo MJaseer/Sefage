@@ -3,7 +3,6 @@ const path = require('path');
 require('dotenv').config({ path: '.env' });
 const session = require('express-session');
 const noCache = require('nocache');
-const nodeMailer = require('nodemailer');
 const logger = require('morgan');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
@@ -49,7 +48,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-
 app.use('/admin', adminRouter);
 app.use('/', usersRouter);
 
@@ -58,10 +56,11 @@ app.use(function (req, res) {
   res.render('user/404')
 });
 
-//middle ware
-// error handler
-app.use(errorhandler.errorhandler);
+
 
 app.listen(process.env.PORT, () => {
   console.log(`PORT ${process.env.PORT} is running...`);
 });
+
+// error handler
+app.use(errorhandler.errorhandler);

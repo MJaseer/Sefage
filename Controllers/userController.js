@@ -103,7 +103,7 @@ const postSignUp = async (req, res) => {
         service: 'Gmail',
         auth: {
           user: 'mjaseer43@gmail.com',
-          pass: 'gqwiikrnrhcajove'
+          pass: process.env.appPass
         }
       })
       const user = await User.findOne({ email: email });
@@ -217,7 +217,7 @@ const emailPost = async (req, res) => {
       service: 'Gmail',
       auth: {
         user: 'mjaseer43@gmail.com',
-        pass: 'gqwiikrnrhcajove'
+        pass: process.env.appPass
       }
     })
     let user = await User.findOne({ email: email });
@@ -231,6 +231,7 @@ const emailPost = async (req, res) => {
       nwOTP.save(async (err) => {
         if (err) {
           msg = err;
+          console.log(err);
           res.redirect('/500')
         } else {
           const mailOptions = {
@@ -242,14 +243,16 @@ const emailPost = async (req, res) => {
           transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
               msg = error
+              console.log(error);
               res.redirect('/500')
             } else {
               console.log(`OTP sent to ${email}: ${otp}`);
-              res.alert(`OTP sent to ${email}`);
+              // res.alert(`OTP sent to ${email}`);
+              res.redirect(`/onlyOtp?&email=${email}`)
             }
           })
         }
-        res.redirect(`/onlyOtp?&email=${email}`);
+        // ;
       });
     } else {
       msg = "User not found "
