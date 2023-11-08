@@ -243,11 +243,9 @@ const emailPost = async (req, res) => {
           transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
               msg = error
-              console.log(error);
               res.redirect('/500')
             } else {
               console.log(`OTP sent to ${email}: ${otp}`);
-              // res.alert(`OTP sent to ${email}`);
               res.redirect(`/onlyOtp?&email=${email}`)
             }
           })
